@@ -3,37 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PFEvent Control</title>
+  <title>PFEC — PFEvent Control</title>
+  <link rel="icon" href="/logo.png" type="image/png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 
-<!-- ══════════════ LOGIN ══════════════ -->
-<div id="screen-login">
+<!-- ══════ LOGIN ══════ -->
+<div id="s-login">
   <nav class="nav">
-    <div class="nav-logo"><span class="logo-icon">◈</span>PFEvent Control</div>
+    <div class="nav-logo">
+      <img src="/logo.png" class="nav-logo-img" alt="PFEC">
+      <span>PFEvent Control</span>
+    </div>
     <span class="nav-tag">Project Flight · VA Events</span>
   </nav>
   <main class="hero">
-    <div class="hero-content">
+    <div class="hero-left">
+      <img src="/logo.png" class="hero-logo" alt="PFEC">
       <div class="hero-eyebrow">Real-time coordination</div>
       <h1 class="hero-title">Flight strips.<br>For VA events.</h1>
-      <p class="hero-sub">ACARS · PDC clearances · ATIS · Live strips.<br>All in one. Powered by Discord.</p>
+      <p class="hero-sub">ACARS · PDC clearances · ATIS · Live strips · Chat<br>Powered by Discord.</p>
       <a href="/auth/discord" class="btn-discord">
         <svg width="20" height="15" viewBox="0 0 127.14 96.36" fill="currentColor"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
         Login with Discord
       </a>
-      <p class="login-error" id="login-error"></p>
+      <p class="login-err" id="login-err"></p>
     </div>
   </main>
 </div>
 
-<!-- ══════════════ ROLE ══════════════ -->
-<div id="screen-role">
+<!-- ══════ ROLE ══════ -->
+<div id="s-role">
   <nav class="nav">
-    <div class="nav-logo"><span class="logo-icon">◈</span>PFEvent Control</div>
+    <div class="nav-logo"><img src="/logo.png" class="nav-logo-img" alt="PFEC"><span>PFEvent Control</span></div>
     <span id="nav-user-role" class="nav-username"></span>
   </nav>
   <main class="role-main">
@@ -43,35 +48,35 @@
       <div class="role-card" onclick="selectRole('atc')">
         <div class="role-icon">🗼</div>
         <div class="role-name">Air Traffic Controller</div>
-        <div class="role-desc">Manage strips, issue PDC clearances, generate ATIS, assign squawk codes</div>
+        <div class="role-desc">Manage strips, issue PDC clearances, generate ATIS, control squawk codes</div>
         <div class="role-tags"><span>Strip board</span><span>ATIS</span><span>PDC</span><span>Squawk</span></div>
       </div>
       <div class="role-card" onclick="selectRole('pilot')">
         <div class="role-icon">✈️</div>
         <div class="role-name">Pilot</div>
-        <div class="role-desc">File IFR/VFR plans via ACARS, request PDC, receive clearances, rate your controller</div>
+        <div class="role-desc">File IFR/VFR plans, use ACARS, request PDC, receive clearances</div>
         <div class="role-tags"><span>ACARS</span><span>Flight plan</span><span>PDC</span><span>Rate ATC</span></div>
       </div>
     </div>
   </main>
 </div>
 
-<!-- ══════════════ HOME ══════════════ -->
-<div id="screen-home">
+<!-- ══════ HOME ══════ -->
+<div id="s-home">
   <nav class="nav">
-    <div class="nav-logo"><span class="logo-icon">◈</span>PFEvent Control</div>
+    <div class="nav-logo"><img src="/logo.png" class="nav-logo-img" alt="PFEC"><span>PFEvent Control</span></div>
     <div class="nav-right">
       <span id="nav-user-home" class="nav-username"></span>
       <span id="nav-role-badge" class="nav-role-badge"></span>
       <button class="btn-ghost" onclick="switchRole()">Switch role</button>
+      <button class="btn-ghost" onclick="openModal('profile-modal')">👤 Profile</button>
       <a class="btn-ghost" href="/auth/logout">Logout</a>
     </div>
   </nav>
   <main class="home-main">
     <div id="home-cards" class="home-cards"></div>
   </main>
-
-  <!-- Create modal -->
+  <!-- Create room modal -->
   <div class="modal-bg" id="create-modal">
     <div class="modal">
       <button class="modal-x" onclick="closeModal('create-modal')">✕</button>
@@ -79,10 +84,9 @@
       <div class="field"><label>Event name</label><input id="c-name" placeholder="Gulf SkyWay Cup — Round 3"></div>
       <div class="field"><label>Airport ICAO</label><input id="c-airport" class="mono" maxlength="4" placeholder="OBBI" style="text-transform:uppercase"></div>
       <button class="btn-primary" onclick="createRoom()">Create room</button>
-      <p class="form-error" id="create-error"></p>
+      <p class="form-err" id="create-err"></p>
     </div>
   </div>
-
   <!-- Join modal -->
   <div class="modal-bg" id="join-modal">
     <div class="modal">
@@ -90,280 +94,190 @@
       <h3 class="modal-title">Join event room</h3>
       <div class="field"><label>Room code</label><input id="j-code" class="mono code-input" maxlength="6" placeholder="A1B2C3" style="text-transform:uppercase" autocomplete="off"></div>
       <button class="btn-primary" onclick="joinRoom()">Join</button>
-      <p class="form-error" id="join-error"></p>
+      <p class="form-err" id="join-err"></p>
+    </div>
+  </div>
+  <!-- Profile modal -->
+  <div class="modal-bg" id="profile-modal">
+    <div class="modal modal-wide">
+      <button class="modal-x" onclick="closeModal('profile-modal')">✕</button>
+      <div id="profile-content"></div>
     </div>
   </div>
 </div>
 
-<!-- ══════════════ ATC BOARD ══════════════ -->
-<div id="screen-atc">
-  <!-- Top nav -->
+<!-- ══════ ATC BOARD ══════ -->
+<div id="s-atc">
   <div class="board-nav">
-    <div class="bnav-left">
+    <div class="bnav-l">
       <button class="back-btn" onclick="goHome()">← Back</button>
       <span class="board-title" id="atc-event-name"></span>
-      <span class="room-code" id="atc-room-code"></span>
+      <span class="room-chip" id="atc-room-code"></span>
     </div>
-    <div class="bnav-right">
-      <div class="stat-chip"><span id="atc-stat-total">0</span> strips</div>
-      <div class="stat-chip pdc-chip" id="atc-pdc-chip" style="display:none">⚠ <span id="atc-pdc-count">0</span> PDC</div>
-      <div class="stat-chip live-chip"><span class="live-dot"></span><span id="atc-stat-conn">0</span> online</div>
+    <div class="bnav-r">
+      <div class="stat-chip"><span id="atc-total">0</span> strips</div>
+      <div class="stat-chip pdc-chip" id="atc-pdc-chip" style="display:none">⚠ <span id="atc-pdc-cnt">0</span> PDC</div>
+      <div class="stat-chip live-chip"><span class="live-dot"></span><span id="atc-conn">0</span> online</div>
       <button class="nav-btn" onclick="openPanel('atis-panel')">📡 ATIS</button>
-      <button class="nav-btn chat-btn" id="atc-chat-btn" onclick="togglePanel('atc-chat')">💬 Chat</button>
+      <button class="nav-btn unread-btn" id="atc-chat-btn" onclick="toggleDrawer('atc-chat')">💬 Chat</button>
       <button class="nav-btn" onclick="openModal('voice-modal')">🎙 Voice</button>
       <button class="nav-btn accent-btn" onclick="openPanel('add-panel')">+ Strip</button>
     </div>
   </div>
-
   <!-- ATIS banner -->
   <div class="atis-banner" id="atis-banner" style="display:none">
-    <span class="atis-letter" id="atis-letter"></span>
-    <span class="atis-text" id="atis-raw"></span>
+    <span class="atis-ltr" id="atis-ltr"></span>
+    <span class="atis-txt" id="atis-txt"></span>
   </div>
-
-  <!-- Strip board -->
+  <!-- Columns -->
   <div class="board-cols">
-    <div class="board-col">
-      <div class="col-hdr"><span class="col-dot" style="background:#6b7280"></span>Registered<span class="col-count" id="cnt-registered">0</span></div>
-      <div class="col-body" id="strips-registered"></div>
-    </div>
-    <div class="board-col">
-      <div class="col-hdr"><span class="col-dot" style="background:#3b82f6"></span>Departing<span class="col-count" id="cnt-departing">0</span></div>
-      <div class="col-body" id="strips-departing"></div>
-    </div>
-    <div class="board-col">
-      <div class="col-hdr"><span class="col-dot" style="background:#22c55e"></span>En Route<span class="col-count" id="cnt-enroute">0</span></div>
-      <div class="col-body" id="strips-enroute"></div>
-    </div>
-    <div class="board-col">
-      <div class="col-hdr"><span class="col-dot" style="background:#a855f7"></span>Arrived<span class="col-count" id="cnt-arrived">0</span></div>
-      <div class="col-body" id="strips-arrived"></div>
-    </div>
+    <div class="board-col"><div class="col-hdr"><span class="cdot" style="background:#6b7280"></span>Registered<span class="col-cnt" id="cnt-registered">0</span></div><div class="col-body" id="strips-registered"></div></div>
+    <div class="board-col"><div class="col-hdr"><span class="cdot" style="background:#3b82f6"></span>Departing<span class="col-cnt" id="cnt-departing">0</span></div><div class="col-body" id="strips-departing"></div></div>
+    <div class="board-col"><div class="col-hdr"><span class="cdot" style="background:#22c55e"></span>En Route<span class="col-cnt" id="cnt-enroute">0</span></div><div class="col-body" id="strips-enroute"></div></div>
+    <div class="board-col"><div class="col-hdr"><span class="cdot" style="background:#a855f7"></span>Arrived<span class="col-cnt" id="cnt-arrived">0</span></div><div class="col-body" id="strips-arrived"></div></div>
   </div>
-
-  <!-- ADD STRIP panel -->
+  <!-- Add strip panel -->
   <div class="side-panel" id="add-panel">
     <div class="panel-hdr"><span>Add flight strip</span><button class="panel-x" onclick="closePanel('add-panel')">✕</button></div>
     <div class="panel-body">
       <div class="field"><label>Callsign</label><input id="a-cs" class="mono" maxlength="8" placeholder="KAV001" style="text-transform:uppercase"></div>
-      <div class="field-row">
-        <div class="field"><label>Aircraft</label><input id="a-ac" class="mono" maxlength="6" placeholder="B77W" style="text-transform:uppercase"></div>
-        <div class="field"><label>VA</label><input id="a-va" placeholder="KAv"></div>
-      </div>
-      <div class="field-row">
-        <div class="field"><label>Origin</label><input id="a-orig" class="mono" maxlength="4" placeholder="OBBI" style="text-transform:uppercase"></div>
-        <div class="field"><label>Dest</label><input id="a-dest" class="mono" maxlength="4" placeholder="OMDB" style="text-transform:uppercase"></div>
-      </div>
-      <div class="field-row">
-        <div class="field"><label>Gate</label><input id="a-gate" class="mono" maxlength="6" placeholder="G14" style="text-transform:uppercase"></div>
-        <div class="field"><label>FL</label><input id="a-fl" class="mono" maxlength="6" placeholder="FL350" style="text-transform:uppercase"></div>
-      </div>
+      <div class="field-row"><div class="field"><label>Aircraft</label><input id="a-ac" class="mono" maxlength="6" placeholder="B77W" style="text-transform:uppercase"></div><div class="field"><label>VA</label><input id="a-va" placeholder="KAv"></div></div>
+      <div class="field-row"><div class="field"><label>Origin</label><input id="a-orig" class="mono" maxlength="4" placeholder="OBBI" style="text-transform:uppercase"></div><div class="field"><label>Dest</label><input id="a-dest" class="mono" maxlength="4" placeholder="OMDB" style="text-transform:uppercase"></div></div>
+      <div class="field-row"><div class="field"><label>Gate</label><input id="a-gate" class="mono" maxlength="6" placeholder="G14" style="text-transform:uppercase"></div><div class="field"><label>FL</label><input id="a-fl" class="mono" maxlength="6" placeholder="FL350" style="text-transform:uppercase"></div></div>
       <div class="field"><label>Pilot username</label><input id="a-pilot" placeholder="PilotName"></div>
       <div class="field"><label>Flight rules</label><select id="a-rules"><option value="IFR">IFR</option><option value="VFR">VFR</option></select></div>
       <div class="field"><label>Remarks</label><input id="a-remarks" placeholder="Optional..."></div>
       <button class="btn-primary" onclick="addStrip()">Add strip</button>
     </div>
   </div>
-
-  <!-- DETAIL panel -->
+  <!-- Detail panel -->
   <div class="side-panel" id="detail-panel">
     <div class="panel-hdr"><span id="d-cs-hdr">Strip</span><button class="panel-x" onclick="closePanel('detail-panel')">✕</button></div>
     <div class="panel-body" id="detail-body"></div>
   </div>
-
   <!-- ATIS panel -->
   <div class="side-panel" id="atis-panel">
     <div class="panel-hdr"><span>Generate ATIS</span><button class="panel-x" onclick="closePanel('atis-panel')">✕</button></div>
     <div class="panel-body">
-      <div class="field-row">
-        <div class="field"><label>Wind</label><input id="at-wind" class="mono" placeholder="270/15KT"></div>
-        <div class="field"><label>QNH</label><input id="at-qnh" class="mono" placeholder="1013"></div>
-      </div>
-      <div class="field-row">
-        <div class="field"><label>Visibility</label><input id="at-vis" placeholder="10KM"></div>
-        <div class="field"><label>Active RWY</label><input id="at-rwy" class="mono" placeholder="12L" style="text-transform:uppercase"></div>
-      </div>
-      <div class="field-row">
-        <div class="field"><label>Temp °C</label><input id="at-temp" class="mono" placeholder="25"></div>
-        <div class="field"><label>Dewpoint</label><input id="at-dew" class="mono" placeholder="15"></div>
-      </div>
+      <div class="field-row"><div class="field"><label>Wind</label><input id="at-wind" class="mono" placeholder="270/15KT"></div><div class="field"><label>QNH</label><input id="at-qnh" class="mono" placeholder="1013"></div></div>
+      <div class="field-row"><div class="field"><label>Visibility</label><input id="at-vis" placeholder="10KM"></div><div class="field"><label>Active RWY</label><input id="at-rwy" class="mono" placeholder="12L" style="text-transform:uppercase"></div></div>
+      <div class="field-row"><div class="field"><label>Temp °C</label><input id="at-temp" class="mono" placeholder="25"></div><div class="field"><label>Dewpoint</label><input id="at-dew" class="mono" placeholder="15"></div></div>
       <div class="field"><label>Cloud / WX</label><input id="at-cloud" placeholder="FEW018 SCT030"></div>
-      <div class="field"><label>Remarks</label><input id="at-remarks" placeholder="Birds on RWY..."></div>
+      <div class="field"><label>Remarks</label><input id="at-rmk" placeholder="Optional..."></div>
       <button class="btn-primary" onclick="generateATIS()">Broadcast ATIS</button>
     </div>
   </div>
-
   <!-- PDC panel -->
   <div class="side-panel" id="pdc-panel">
     <div class="panel-hdr"><span>Issue PDC Clearance</span><button class="panel-x" onclick="closePanel('pdc-panel')">✕</button></div>
     <div class="panel-body">
-      <div class="pdc-info-box" id="pdc-pilot-info"></div>
-      <div class="field"><label>Squawk (leave blank to auto-generate)</label><input id="pdc-squawk" class="mono" placeholder="Auto" maxlength="4"></div>
-      <div class="field-row">
-        <div class="field"><label>SID</label><input id="pdc-sid" class="mono" placeholder="DAVMO1A" style="text-transform:uppercase"></div>
-        <div class="field"><label>STAR</label><input id="pdc-star" class="mono" placeholder="VUTEB1A" style="text-transform:uppercase"></div>
-      </div>
-      <div class="field-row">
-        <div class="field"><label>Cleared FL</label><input id="pdc-fl" class="mono" placeholder="FL350" style="text-transform:uppercase"></div>
-        <div class="field"><label>Frequency</label><input id="pdc-freq" class="mono" placeholder="118.30"></div>
-      </div>
-      <div class="field"><label>Remarks</label><textarea id="pdc-remarks" rows="3" placeholder="Contact Ground on 121.9..."></textarea></div>
+      <div class="pdc-info" id="pdc-info"></div>
+      <div class="field"><label>Squawk (blank = auto)</label><input id="pdc-sq" class="mono" placeholder="Auto" maxlength="4"></div>
+      <div class="field-row"><div class="field"><label>SID</label><input id="pdc-sid" class="mono" placeholder="DAVMO1A" style="text-transform:uppercase"></div><div class="field"><label>STAR</label><input id="pdc-star" class="mono" placeholder="VUTEB1A" style="text-transform:uppercase"></div></div>
+      <div class="field-row"><div class="field"><label>Cleared FL</label><input id="pdc-fl" class="mono" placeholder="FL350" style="text-transform:uppercase"></div><div class="field"><label>Frequency</label><input id="pdc-freq" class="mono" placeholder="118.30"></div></div>
+      <div class="field"><label>Remarks</label><textarea id="pdc-rmk" rows="3" placeholder="Contact Ground on 121.9..."></textarea></div>
       <button class="btn-primary" onclick="issuePDC()">Issue Clearance</button>
     </div>
   </div>
-
   <!-- ATC Chat -->
   <div class="chat-drawer" id="atc-chat">
-    <div class="chat-hdr">
-      <span>💬 Event Chat</span>
-      <button class="panel-x" onclick="togglePanel('atc-chat')">✕</button>
-    </div>
-    <div class="chat-msgs" id="atc-chat-msgs"></div>
-    <div class="chat-input-row">
-      <input class="chat-input" id="atc-chat-input" placeholder="Message..." maxlength="300" onkeydown="if(event.key==='Enter')sendChat()">
-      <button class="chat-send" onclick="sendChat()">↑</button>
-    </div>
+    <div class="chat-hdr"><span>💬 Event Chat</span><button class="panel-x" onclick="toggleDrawer('atc-chat')">✕</button></div>
+    <div class="chat-msgs" id="atc-msgs"></div>
+    <div class="chat-input-row"><input class="chat-input" id="atc-chat-inp" placeholder="Message..." maxlength="300" onkeydown="if(event.key==='Enter')sendChat()"><button class="chat-send" onclick="sendChat()">↑</button></div>
   </div>
-
   <!-- Voice modal -->
   <div class="modal-bg" id="voice-modal">
     <div class="modal">
       <button class="modal-x" onclick="closeModal('voice-modal')">✕</button>
       <h3 class="modal-title">🎙 Voice Chat</h3>
-      <p style="font-size:13px;color:var(--t2);margin-bottom:18px;line-height:1.6">Paste your Discord voice channel link so pilots can join with one click.</p>
-      <div class="field"><label>Discord voice channel link</label><input id="voice-url-input" type="url" placeholder="https://discord.gg/..."></div>
-      <div id="voice-active-box" style="display:none" class="voice-active-box">
-        <span>🎙</span>
-        <div><div style="font-size:12px;font-weight:600;margin-bottom:3px">Voice Active</div><a id="voice-link-a" href="#" target="_blank" style="font-size:12px;color:#5865F2">Join on Discord →</a></div>
-      </div>
-      <button class="btn-primary" onclick="setVoiceLink()">Set link</button>
+      <p style="font-size:13px;color:var(--t2);margin-bottom:16px;line-height:1.6">Paste your Discord voice channel link. All participants will see a join button.</p>
+      <div id="voice-active" style="display:none" class="voice-active"><span style="font-size:20px">🎙</span><div><div style="font-size:12px;font-weight:600;margin-bottom:2px">Voice Active</div><a id="voice-a" href="#" target="_blank" style="font-size:12px;color:#5865F2">Join on Discord →</a></div></div>
+      <div class="field"><label>Discord voice channel link</label><input id="voice-inp" type="url" placeholder="https://discord.gg/..."></div>
+      <button class="btn-primary" onclick="setVoice()">Set link</button>
     </div>
   </div>
-
   <div class="toast" id="atc-toast"></div>
 </div>
 
-<!-- ══════════════ PILOT ACARS ══════════════ -->
-<div id="screen-pilot">
-  <div class="acars-layout">
-
+<!-- ══════ PILOT ACARS ══════ -->
+<div id="s-pilot">
+  <div class="acars-wrap">
     <!-- Left: Controllers + ATIS -->
     <div class="acars-left">
       <div class="acars-left-top">
         <button class="back-btn" onclick="goHome()">← Back</button>
-        <span class="acars-event-name" id="pilot-event-name"></span>
+        <span class="acars-evtname" id="pilot-evtname"></span>
       </div>
-      <div class="acars-section-label">Controllers</div>
-      <div id="controllers-list"><div class="acars-empty">No controllers online</div></div>
-      <div class="acars-section-label">((·)) ATIS</div>
+      <div class="acars-slabel">Controllers</div>
+      <div id="ctrl-list"><div class="acars-empty">No controllers online</div></div>
+      <div class="acars-slabel">((·)) ATIS</div>
       <div id="atis-list"><div class="acars-empty">No ATIS yet</div></div>
     </div>
-
     <!-- Center: Terminal -->
     <div class="acars-center">
-      <div class="acars-term-hdr">
-        <span class="term-caret">▶</span>
+      <div class="acars-thdr">
+        <span class="tcaret">▶</span>
         <span id="acars-title">ACARS</span>
-        <div class="acars-term-hdr-right">
-          <span class="room-code" id="pilot-room-code"></span>
-          <div class="stat-chip live-chip"><span class="live-dot"></span><span id="pilot-stat-conn">0</span> online</div>
-          <button class="nav-btn chat-btn" onclick="togglePanel('pilot-chat')">💬</button>
-          <button class="nav-btn" onclick="openModal('voice-modal')">🎙</button>
+        <div class="acars-thdr-r">
+          <span class="room-chip" id="pilot-room-code"></span>
+          <div class="stat-chip live-chip"><span class="live-dot"></span><span id="pilot-conn">0</span> online</div>
+          <button class="nav-btn unread-btn" id="pilot-chat-btn" onclick="toggleDrawer('pilot-chat')">💬</button>
+          <button class="nav-btn" onclick="showVoice()">🎙</button>
         </div>
       </div>
       <div class="acars-term" id="acars-term"></div>
-      <div class="acars-action-bar">
+      <div class="acars-bar">
         <div id="bar-file"><button class="acars-btn" onclick="openModal('file-modal')">FILE FLIGHT PLAN</button></div>
-        <div id="bar-pdc" style="display:none"><button class="acars-btn pdc-btn" onclick="requestPDC()">REQUEST PDC</button></div>
+        <div id="bar-pdc"  style="display:none"><button class="acars-btn pdc-btn" onclick="reqPDC()">REQUEST PDC</button></div>
         <div id="bar-done" style="display:none"><button class="acars-btn done-btn" onclick="openModal('rate-modal')">RATE CONTROLLER</button></div>
       </div>
     </div>
-
     <!-- Right: Flight notes -->
     <div class="acars-right">
-      <div class="acars-section-label">🗒 Flight Notes</div>
-      <div id="flight-notes"><div class="acars-empty">File a flight plan to see details here.</div></div>
+      <div class="acars-slabel">🗒 Flight Notes</div>
+      <div id="fnotes"><div class="acars-empty">File a flight plan to see details.</div></div>
     </div>
-
   </div>
-
   <!-- Pilot chat -->
   <div class="chat-drawer" id="pilot-chat">
-    <div class="chat-hdr">
-      <span>💬 Event Chat</span>
-      <button class="panel-x" onclick="togglePanel('pilot-chat')">✕</button>
-    </div>
-    <div class="chat-msgs" id="pilot-chat-msgs"></div>
-    <div class="chat-input-row">
-      <input class="chat-input" id="pilot-chat-input" placeholder="Message..." maxlength="300" onkeydown="if(event.key==='Enter')sendChat()">
-      <button class="chat-send" onclick="sendChat()">↑</button>
+    <div class="chat-hdr"><span>💬 Event Chat</span><button class="panel-x" onclick="toggleDrawer('pilot-chat')">✕</button></div>
+    <div class="chat-msgs" id="pilot-msgs"></div>
+    <div class="chat-input-row"><input class="chat-input" id="pilot-chat-inp" placeholder="Message..." maxlength="300" onkeydown="if(event.key==='Enter')sendChat()"><button class="chat-send" onclick="sendChat()">↑</button></div>
+  </div>
+  <!-- Voice info (pilot) -->
+  <div class="modal-bg" id="pilot-voice-modal">
+    <div class="modal">
+      <button class="modal-x" onclick="closeModal('pilot-voice-modal')">✕</button>
+      <h3 class="modal-title">🎙 Voice Chat</h3>
+      <div id="pilot-voice-active" style="display:none" class="voice-active"><span style="font-size:20px">🎙</span><div><div style="font-size:12px;font-weight:600;margin-bottom:2px">Voice Channel</div><a id="pilot-voice-a" href="#" target="_blank" style="font-size:12px;color:#5865F2">Join on Discord →</a></div></div>
+      <p id="pilot-voice-none" style="font-size:13px;color:var(--t2)">No voice link set yet. Your ATC will set one.</p>
     </div>
   </div>
-
-  <!-- File flight plan modal -->
+  <!-- File modal -->
   <div class="modal-bg" id="file-modal">
     <div class="modal" style="width:420px">
       <button class="modal-x" onclick="closeModal('file-modal')">✕</button>
       <h3 class="modal-title">File Flight Plan</h3>
       <div class="field"><label>Callsign</label><input id="p-cs" class="mono" maxlength="8" placeholder="KAV001" style="text-transform:uppercase"></div>
-      <div class="field-row">
-        <div class="field"><label>Aircraft</label><input id="p-ac" class="mono" maxlength="6" placeholder="B77W" style="text-transform:uppercase"></div>
-        <div class="field"><label>VA / Airline</label><input id="p-va" placeholder="KAv"></div>
-      </div>
-      <div class="field-row">
-        <div class="field"><label>Origin</label><input id="p-orig" class="mono" maxlength="4" placeholder="OBBI" style="text-transform:uppercase"></div>
-        <div class="field"><label>Destination</label><input id="p-dest" class="mono" maxlength="4" placeholder="OMDB" style="text-transform:uppercase"></div>
-      </div>
-      <div class="field-row">
-        <div class="field"><label>Gate / Stand</label><input id="p-gate" class="mono" maxlength="6" placeholder="G14" style="text-transform:uppercase"></div>
-        <div class="field"><label>Requested FL</label><input id="p-fl" class="mono" maxlength="6" placeholder="FL350" style="text-transform:uppercase"></div>
-      </div>
-      <div class="field"><label>Flight rules</label>
-        <div class="toggle-row">
-          <button class="toggle-btn active" id="btn-ifr" onclick="setRules('IFR')">IFR</button>
-          <button class="toggle-btn" id="btn-vfr" onclick="setRules('VFR')">VFR</button>
-        </div>
-      </div>
-      <div class="field-row">
-        <div class="field"><label>Route</label><input id="p-route" class="mono" placeholder="DAVMO DCT VUTEB"></div>
-        <div class="field"><label>Runway</label><input id="p-rwy" class="mono" maxlength="4" placeholder="12L" style="text-transform:uppercase"></div>
-      </div>
-      <div class="field"><label>Remarks</label><input id="p-remarks" placeholder="Optional..."></div>
+      <div class="field-row"><div class="field"><label>Aircraft</label><input id="p-ac" class="mono" maxlength="6" placeholder="B77W" style="text-transform:uppercase"></div><div class="field"><label>VA / Airline</label><input id="p-va" placeholder="KAv"></div></div>
+      <div class="field-row"><div class="field"><label>Origin</label><input id="p-orig" class="mono" maxlength="4" placeholder="OBBI" style="text-transform:uppercase"></div><div class="field"><label>Destination</label><input id="p-dest" class="mono" maxlength="4" placeholder="OMDB" style="text-transform:uppercase"></div></div>
+      <div class="field-row"><div class="field"><label>Gate / Stand</label><input id="p-gate" class="mono" maxlength="6" placeholder="G14" style="text-transform:uppercase"></div><div class="field"><label>Requested FL</label><input id="p-fl" class="mono" maxlength="6" placeholder="FL350" style="text-transform:uppercase"></div></div>
+      <div class="field"><label>Flight Rules</label><div class="toggle-row"><button class="toggle-btn active" id="btn-ifr" onclick="setRules('IFR')">IFR</button><button class="toggle-btn" id="btn-vfr" onclick="setRules('VFR')">VFR</button></div></div>
+      <div class="field-row"><div class="field"><label>Route</label><input id="p-route" class="mono" placeholder="DAVMO DCT VUTEB"></div><div class="field"><label>Runway</label><input id="p-rwy" class="mono" maxlength="4" placeholder="12L" style="text-transform:uppercase"></div></div>
+      <div class="field"><label>Remarks</label><input id="p-rmk" placeholder="Optional..."></div>
       <button class="btn-primary" onclick="fileFlight()">Submit Flight Plan</button>
     </div>
   </div>
-
   <!-- Rate modal -->
   <div class="modal-bg" id="rate-modal">
     <div class="modal">
       <button class="modal-x" onclick="closeModal('rate-modal')">✕</button>
       <h3 class="modal-title">Rate your controller</h3>
-      <div class="field"><label>Rating</label>
-        <div class="stars" id="stars">
-          <span class="star" data-v="1">★</span><span class="star" data-v="2">★</span><span class="star" data-v="3">★</span><span class="star" data-v="4">★</span><span class="star" data-v="5">★</span>
-        </div>
-      </div>
-      <div class="field"><label>Comment</label><textarea id="rate-comment" rows="3" placeholder="How was your ATC experience?"></textarea></div>
-      <div style="display:flex;gap:8px;margin-top:8px">
-        <button class="btn-secondary" onclick="closeModal('rate-modal')">Skip</button>
-        <button class="btn-primary" style="margin:0" onclick="submitRating()">Submit</button>
-      </div>
+      <div class="field"><label>Rating</label><div class="stars" id="stars"><span class="star" data-v="1">★</span><span class="star" data-v="2">★</span><span class="star" data-v="3">★</span><span class="star" data-v="4">★</span><span class="star" data-v="5">★</span></div></div>
+      <div class="field"><label>Comment</label><textarea id="rate-cmt" rows="3" placeholder="How was your ATC experience?"></textarea></div>
+      <div style="display:flex;gap:8px;margin-top:8px"><button class="btn-secondary" onclick="closeModal('rate-modal')">Skip</button><button class="btn-primary" style="margin:0" onclick="submitRating()">Submit</button></div>
     </div>
   </div>
-
-  <!-- Voice modal (pilot) -->
-  <div class="modal-bg" id="voice-modal">
-    <div class="modal">
-      <button class="modal-x" onclick="closeModal('voice-modal')">✕</button>
-      <h3 class="modal-title">🎙 Voice Chat</h3>
-      <div id="voice-active-box-pilot" style="display:none" class="voice-active-box">
-        <span>🎙</span>
-        <div><div style="font-size:12px;font-weight:600;margin-bottom:3px">Voice Active</div><a id="voice-link-a-pilot" href="#" target="_blank" style="font-size:12px;color:#5865F2">Join on Discord →</a></div>
-      </div>
-      <p id="voice-no-link" style="font-size:13px;color:var(--t2)">No voice link set yet. Ask your ATC to set one.</p>
-    </div>
-  </div>
-
   <div class="toast" id="pilot-toast"></div>
 </div>
 
